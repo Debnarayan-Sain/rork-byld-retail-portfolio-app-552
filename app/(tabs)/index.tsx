@@ -169,13 +169,13 @@ export default function DashboardScreen() {
   const handleCategoryPress = (categoryId: string) => {
     switch (categoryId) {
       case 'assets':
-        router.push('/portfolio');
+        router.push('/assets');
         break;
       case 'security':
-        router.push('/profile');
+        router.push('/security');
         break;
       case 'liabilities':
-        router.push('/liability');
+        router.push('/liabilities');
         break;
       case 'goals':
         router.push('/goals');
