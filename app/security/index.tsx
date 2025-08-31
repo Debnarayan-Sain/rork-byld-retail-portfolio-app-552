@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Stack } from 'expo-router';
-import { Shield, Heart, Umbrella, PiggyBank, TrendingUp, Home, Car, Briefcase, DollarSign } from 'lucide-react-native';
+import { Stack, router } from 'expo-router';
+import { Shield, Heart, Umbrella, PiggyBank, TrendingUp, Home, Car, Briefcase, DollarSign, ArrowLeft } from 'lucide-react-native';
 import { useTheme } from '@/contexts/ThemeContext';
 
 interface SecurityItem {
@@ -39,7 +39,16 @@ export default function SecurityScreen() {
       
       {/* Custom Header */}
       <View style={[styles.header, { backgroundColor: theme.colors.background, borderBottomColor: theme.colors.border }]}>
-        <Text style={[styles.headerTitle, { color: theme.colors.text }]}>Security</Text>
+        <View style={styles.headerContent}>
+          <TouchableOpacity 
+            style={styles.backButton}
+            onPress={() => router.back()}
+            testID="back-button"
+          >
+            <ArrowLeft size={24} color={theme.colors.text} />
+          </TouchableOpacity>
+          <Text style={[styles.headerTitle, { color: theme.colors.text }]}>Security</Text>
+        </View>
       </View>
       
       <View style={[styles.summaryCard, { backgroundColor: theme.colors.surface }]}>
@@ -137,6 +146,14 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     borderBottomWidth: 1,
     marginBottom: 8,
+  },
+  headerContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  backButton: {
+    marginRight: 16,
+    padding: 4,
   },
   headerTitle: {
     fontSize: 28,

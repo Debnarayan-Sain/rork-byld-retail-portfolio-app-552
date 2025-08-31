@@ -11,7 +11,8 @@ import {
   Landmark,
   Home as HomeIcon,
   Coins,
-  BarChart3
+  BarChart3,
+  ArrowLeft
 } from 'lucide-react-native';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -55,7 +56,16 @@ export default function AssetsScreen() {
       
       {/* Custom Header */}
       <View style={[styles.header, { backgroundColor: theme.colors.background, borderBottomColor: theme.colors.border }]}>
-        <Text style={[styles.headerTitle, { color: theme.colors.text }]}>{t.assets.title}</Text>
+        <View style={styles.headerContent}>
+          <TouchableOpacity 
+            style={styles.backButton}
+            onPress={() => router.back()}
+            testID="back-button"
+          >
+            <ArrowLeft size={24} color={theme.colors.text} />
+          </TouchableOpacity>
+          <Text style={[styles.headerTitle, { color: theme.colors.text }]}>{t.assets.title}</Text>
+        </View>
       </View>
       
       <View style={[styles.summaryCard, { backgroundColor: theme.colors.surface }]}>
@@ -128,6 +138,14 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     borderBottomWidth: 1,
     marginBottom: 8,
+  },
+  headerContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  backButton: {
+    marginRight: 16,
+    padding: 4,
   },
   headerTitle: {
     fontSize: 28,
