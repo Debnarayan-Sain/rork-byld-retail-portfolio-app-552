@@ -43,21 +43,21 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="portfolio"
+        name="(assets)"
         options={{
           title: "Assets",
           tabBarIcon: ({ color, size }) => <TrendingUp size={size} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="(security)"
         options={{
           title: "Security",
           tabBarIcon: ({ color, size }) => <Shield size={size} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="liability"
+        name="(liability)"
         options={{
           title: "Liability",
           tabBarIcon: ({ color, size }) => <CreditCard size={size} color={color} />,
