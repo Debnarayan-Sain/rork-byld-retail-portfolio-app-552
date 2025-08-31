@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Stack } from 'expo-router';
 import { Car, Home, CreditCard, User } from 'lucide-react-native';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -60,16 +61,18 @@ export default function LiabilitiesScreen() {
   const { theme } = useTheme();
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]} edges={['top', 'bottom']}>
       <Stack.Screen 
         options={{
-          title: 'Liabilities',
-          headerStyle: { backgroundColor: theme.colors.surface },
-          headerTintColor: theme.colors.text,
-          headerTitleStyle: { fontWeight: 'bold' },
+          headerShown: false
         }} 
       />
       <StatusBar barStyle={theme.name === 'Dark Professional' ? 'light-content' : 'dark-content'} backgroundColor={theme.colors.background} />
+      
+      {/* Custom Header */}
+      <View style={[styles.header, { backgroundColor: theme.colors.background, borderBottomColor: theme.colors.border }]}>
+        <Text style={[styles.headerTitle, { color: theme.colors.text }]}>Liabilities</Text>
+      </View>
       
       <View style={[styles.summaryCard, { backgroundColor: theme.colors.surface }]}>
         <Text style={[styles.summaryLabel, { color: theme.colors.textSecondary }]}>Total Liabilities</Text>
@@ -201,13 +204,23 @@ export default function LiabilitiesScreen() {
           </Text>
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  header: {
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    marginBottom: 8,
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: '700',
   },
   summaryCard: {
     marginHorizontal: 20,
