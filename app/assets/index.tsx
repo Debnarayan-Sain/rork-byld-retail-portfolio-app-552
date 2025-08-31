@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Stack, router } from 'expo-router';
 import { 
   Banknote,
@@ -44,16 +45,18 @@ export default function AssetsScreen() {
   ];
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]} edges={['top', 'bottom']}>
       <Stack.Screen 
         options={{
-          title: t.assets.title,
-          headerStyle: { backgroundColor: theme.colors.surface },
-          headerTintColor: theme.colors.text,
-          headerTitleStyle: { fontWeight: 'bold' }
+          headerShown: false
         }} 
       />
       <StatusBar barStyle={theme.name === 'dark' ? 'light-content' : 'dark-content'} backgroundColor={theme.colors.background} />
+      
+      {/* Custom Header */}
+      <View style={[styles.header, { backgroundColor: theme.colors.background, borderBottomColor: theme.colors.border }]}>
+        <Text style={[styles.headerTitle, { color: theme.colors.text }]}>{t.assets.title}</Text>
+      </View>
       
       <View style={[styles.summaryCard, { backgroundColor: theme.colors.surface }]}>
         <Text style={[styles.summaryLabel, { color: theme.colors.textSecondary }]}>{t.assets.totalAssets}</Text>
@@ -112,13 +115,23 @@ export default function AssetsScreen() {
           );
         })}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  header: {
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    marginBottom: 8,
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: '700',
   },
   summaryCard: {
     marginHorizontal: 20,
